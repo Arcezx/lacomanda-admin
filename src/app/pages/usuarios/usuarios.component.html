@@ -1,0 +1,60 @@
+<div class="pagina-header">
+  <h1>Usuarios</h1>
+  <button class="boton-nuevo" (click)="abrirNuevo()">+ Nuevo usuario</button>
+</div>
+
+<p class="error-mensaje" *ngIf="error">{{ error }}</p>
+
+<div class="tabla-wrapper" *ngIf="!cargando">
+  <table>
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>
+          <span class="badge" [class.badge-admin]="usuario.rol === 'ADMIN'" [class.badge-camarero]="usuario.rol === 'CAMARERO'">
+            {{ usuario.rol }}
+          </span>
+        </td>
+        <td class="acciones">
+          <button class="boton-editar" (click)="abrirEditar(usuario)">Editar</button>
+          <button class="boton-eliminar" (click)="eliminar(usuario)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+    <h2>{{ editando ? 'Editar usuario' : 'Nuevo usuario' }}</h2>
+
+    <label>Nombre de usuario</label>
+    <input type="text" [(ngModel)]="formUsername" />
+
+    <label>Nombre completo</label>
+    <input type="text" [(ngModel)]="formNombre" />
+
+    <label>{{ editando ? 'Nueva contraseña (dejar en blanco para no cambiarla)' : 'Contraseña' }}</label>
+    <input type="password" [(ngModel)]="formPassword" />
+
+    <label>Rol</label>
+    <select [(ngModel)]="formRol">
+      <option value="CAMARERO">Camarero</option>
+      <option value="ADMIN">Administrador</option>
+    </select>
+
+    <div class="modal-acciones">
+      <button class="boton-cancelar" (click)="cerrarModal()">Cancelar</button>
+      <button class="boton-guardar" (click)="guardar()">Guardar</button>
+    </div>
+  </div>
+</div>
