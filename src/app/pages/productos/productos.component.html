@@ -1,0 +1,38 @@
+<div class="pagina-header">
+  <h1>Productos</h1>
+  <button class="boton-nuevo" (click)="irANuevo()">+ Nuevo producto</button>
+</div>
+
+<p class="error-mensaje" *ngIf="error">{{ error }}</p>
+
+<div class="tabla-wrapper" *ngIf="!cargando">
+  <table>
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td><img [src]="producto.foto" [alt]="producto.nombreEs" class="foto-mini" /></td>
+        <td>{{ producto.nombreEs }}</td>
+        <td>{{ producto.categoriaNombreEs }}</td>
+        <td>{{ producto.precio.toFixed(2) }} €</td>
+        <td>
+          <span class="badge" [class.badge-si]="producto.disponible" [class.badge-no]="!producto.disponible">
+            {{ producto.disponible ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="acciones">
+          <button class="boton-editar" (click)="irAEditar(producto)">Editar</button>
+          <button class="boton-eliminar" (click)="eliminar(producto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

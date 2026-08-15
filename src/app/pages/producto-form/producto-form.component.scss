@@ -1,0 +1,196 @@
+.pagina-header {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    color: #2b2b2b;
+  }
+}
+
+.error-mensaje {
+  color: #c0392b;
+  margin-bottom: 16px;
+  background: #fce8e8;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+}
+
+.bloque {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    margin: 0 0 18px 0;
+    font-size: 1.05rem;
+    color: #BF0426;
+  }
+}
+
+.fila {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.campo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.82rem;
+    color: #6b6b6b;
+    margin-bottom: 5px;
+  }
+
+  input, select, textarea {
+    padding: 9px 12px;
+    border: 1px solid #e0dad7;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.campo-ancho {
+  flex: 3;
+}
+
+.campo-checkbox {
+  flex: 1;
+  justify-content: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #2b2b2b;
+  cursor: pointer;
+
+  input {
+    width: auto;
+  }
+}
+
+.lista-dinamica {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.fila-dinamica {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #e0dad7;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+.fila-extra .input-precio {
+  flex: 0 0 110px;
+}
+
+.boton-quitar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #fce8e8;
+  color: #c0392b;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.boton-agregar {
+  background: #eef1ec;
+  color: #2b2b2b;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.alergenos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.alergeno-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #F7F3F1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  input {
+    width: auto;
+  }
+}
+
+.alergeno-icono {
+  width: 18px;
+  height: 18px;
+}
+
+.acciones-finales {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+.boton-cancelar {
+  background: #F7F3F1;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.boton-guardar {
+  background: #2e7d32;
+  color: #ffffff;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:disabled {
+    background: #cccccc;
+  }
+}

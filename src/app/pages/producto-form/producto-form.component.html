@@ -1,0 +1,122 @@
+<div class="pagina-header">
+  <h1>{{ esEdicion ? 'Editar producto' : 'Nuevo producto' }}</h1>
+</div>
+
+<p class="error-mensaje" *ngIf="error">{{ error }}</p>
+
+<div class="formulario">
+  <section class="bloque">
+    <h2>Datos básicos</h2>
+
+    <div class="fila">
+      <div class="campo">
+        <label>Categoría</label>
+        <select [(ngModel)]="categoriaId">
+          <option [ngValue]="null" disabled>Selecciona una categoría</option>
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+            {{ categoria.nombreEs }}
+          </option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Precio (€)</label>
+        <input type="number" step="0.01" [(ngModel)]="precio" />
+      </div>
+    </div>
+
+    <div class="fila">
+      <div class="campo">
+        <label>Nombre (Español)</label>
+        <input type="text" [(ngModel)]="nombreEs" />
+      </div>
+      <div class="campo">
+        <label>Nombre (Valenciano)</label>
+        <input type="text" [(ngModel)]="nombreVal" />
+      </div>
+      <div class="campo">
+        <label>Nombre (Inglés)</label>
+        <input type="text" [(ngModel)]="nombreEn" />
+      </div>
+    </div>
+
+    <div class="fila">
+      <div class="campo">
+        <label>Descripción (Español)</label>
+        <textarea [(ngModel)]="descripcionEs" rows="2"></textarea>
+      </div>
+      <div class="campo">
+        <label>Descripción (Valenciano)</label>
+        <textarea [(ngModel)]="descripcionVal" rows="2"></textarea>
+      </div>
+      <div class="campo">
+        <label>Descripción (Inglés)</label>
+        <textarea [(ngModel)]="descripcionEn" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="fila">
+      <div class="campo campo-ancho">
+        <label>URL de la foto</label>
+        <input type="text" [(ngModel)]="foto" placeholder="http://localhost:8090/imagenes/productos/..." />
+      </div>
+
+      <div class="campo campo-checkbox">
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="disponible" />
+          Disponible
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <h2>Ingredientes</h2>
+
+    <div class="lista-dinamica">
+      <div class="fila-dinamica" *ngFor="let ingrediente of ingredientes; let i = index">
+        <input type="text" [(ngModel)]="ingrediente.nombre" placeholder="Nombre del ingrediente" />
+        <button class="boton-quitar" (click)="eliminarIngrediente(i)">✕</button>
+      </div>
+    </div>
+
+    <button class="boton-agregar" (click)="agregarIngrediente()">+ Añadir ingrediente</button>
+  </section>
+
+  <section class="bloque">
+    <h2>Alérgenos</h2>
+
+    <div class="alergenos-grid">
+      <label class="alergeno-item" *ngFor="let alergeno of alergenos">
+        <input
+          type="checkbox"
+          [checked]="alergenosSeleccionados.has(alergeno.id)"
+          (change)="alternarAlergeno(alergeno.id)"
+        />
+        <img [src]="alergeno.icono" [alt]="alergeno.nombreEs" class="alergeno-icono" />
+        {{ alergeno.nombreEs }}
+      </label>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <h2>Extras</h2>
+
+    <div class="lista-dinamica">
+      <div class="fila-dinamica fila-extra" *ngFor="let extra of extras; let i = index">
+        <input type="text" [(ngModel)]="extra.nombre" placeholder="Nombre del extra" />
+        <input type="number" step="0.01" [(ngModel)]="extra.precio" placeholder="Precio" class="input-precio" />
+        <button class="boton-quitar" (click)="eliminarExtra(i)">✕</button>
+      </div>
+    </div>
+
+    <button class="boton-agregar" (click)="agregarExtra()">+ Añadir extra</button>
+  </section>
+
+  <div class="acciones-finales">
+    <button class="boton-cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="boton-guardar" [disabled]="guardando" (click)="guardar()">
+      {{ guardando ? 'Guardando...' : 'Guardar producto' }}
+    </button>
+  </div>
+</div>

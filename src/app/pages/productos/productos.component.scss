@@ -1,0 +1,100 @@
+.pagina-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    color: #2b2b2b;
+  }
+}
+
+.boton-nuevo {
+  background: #BF0426;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error-mensaje {
+  color: #c0392b;
+  margin-bottom: 16px;
+}
+
+.tabla-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #F7F3F1;
+  color: #6b6b6b;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 12px 16px;
+  border-top: 1px solid #f0ebe8;
+  font-size: 0.92rem;
+}
+
+.foto-mini {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-si {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-no {
+  background: #fce8e8;
+  color: #c0392b;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.boton-editar, .boton-eliminar {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.boton-editar {
+  background: #eef1ec;
+  color: #2b2b2b;
+}
+
+.boton-eliminar {
+  background: #fce8e8;
+  color: #c0392b;
+}
