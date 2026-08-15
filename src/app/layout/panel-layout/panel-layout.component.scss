@@ -1,0 +1,60 @@
+.panel-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.menu-lateral {
+  width: 220px;
+  background: linear-gradient(180deg, #BF0426, #8C0327);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+
+  h2 {
+    margin: 0 0 24px 0;
+    font-size: 1.3rem;
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+
+  a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.activo {
+      background: rgba(255, 255, 255, 0.18);
+      font-weight: 600;
+      color: #ffffff;
+    }
+  }
+}
+
+.boton-logout {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.contenido {
+  flex: 1;
+  background: #F7F3F1;
+  padding: 28px;
+  overflow-y: auto;
+}
