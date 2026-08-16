@@ -1,0 +1,144 @@
+<div class="pagina-header">
+  <h1>Estadísticas</h1>
+</div>
+
+<div class="filtros">
+  <div class="campo">
+    <label>Desde</label>
+    <input type="date" [(ngModel)]="desde" />
+  </div>
+  <div class="campo">
+    <label>Hasta</label>
+    <input type="date" [(ngModel)]="hasta" />
+  </div>
+  <button class="boton-buscar" (click)="buscar()">Generar</button>
+</div>
+
+<p class="error-mensaje" *ngIf="error">{{ error }}</p>
+
+<ng-container *ngIf="buscado && !cargando">
+
+  <div class="kpis">
+    <div class="kpi-card">
+      <span class="kpi-numero">{{ totalGeneral().toFixed(2) }} €</span>
+      <span class="kpi-etiqueta">Ventas totales</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-numero">{{ pedidos.length }}</span>
+      <span class="kpi-etiqueta">Pedidos</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-numero">{{ ticketMedio().toFixed(2) }} €</span>
+      <span class="kpi-etiqueta">Ticket medio</span>
+    </div>
+  </div>
+
+  <div class="panel-grafico panel-ancho">
+    <h2>Ventas por día</h2>
+    <div class="sin-datos" *ngIf="ventasPorDia.length === 0">Sin datos en este rango</div>
+    <div class="grafico-barras-dias" *ngIf="ventasPorDia.length > 0">
+      <div class="dia-columna" *ngFor="let dia of ventasPorDia">
+        <span class="dia-total">{{ dia.total.toFixed(0) }}€</span>
+        <div class="dia-barra-track">
+          <div class="dia-barra-relleno" [style.height.%]="(dia.total / maxVentaDia()) * 100"></div>
+        </div>
+        <span class="dia-etiqueta">{{ dia.etiqueta }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="graficos-grid">
+
+    <div class="panel-grafico">
+      <h2>Productos más vendidos</h2>
+      <div class="sin-datos" *ngIf="productosVendidos.length === 0">Sin datos en este rango</div>
+      <div class="barra-fila" *ngFor="let producto of productosVendidos; let i = index">
+        <span class="barra-nombre">{{ producto.nombre }}</span>
+        <div class="barra-track">
+          <div
+            class="barra-relleno"
+            [style.width.%]="(producto.cantidad / maxCantidadProducto()) * 100"
+            [style.background]="colorBarra(i)"
+          ></div>
+        </div>
+        <span class="barra-valor">{{ producto.cantidad }}</span>
+      </div>
+    </div>
+
+    <div class="panel-grafico">
+      <h2>Ventas por categoría</h2>
+      <div class="sin-datos" *ngIf="categoriasVenta.length === 0">Sin datos en este rango</div>
+      <div class="donut-wrapper" *ngIf="categoriasVenta.length > 0">
+        <svg viewBox="0 0 36 36" class="donut-svg">
+          <circle
+            *ngFor="let cat of categoriasVenta"
+            cx="18" cy="18" r="15.9155"
+            fill="transparent"
+            [attr.stroke]="cat.color"
+            stroke-width="4"
+            [attr.stroke-dasharray]="cat.porcentaje + ' ' + (100 - cat.porcentaje)"
+            [attr.stroke-dashoffset]="cat.dashOffset"
+          />
+        </svg>
+        <div class="donut-leyenda">
+          <div class="leyenda-item" *ngFor="let cat of categoriasVenta">
+            <span class="punto" [style.background]="cat.color"></span>
+            {{ cat.nombre }} — {{ cat.total.toFixed(2) }} € ({{ cat.porcentaje.toFixed(0) }}%)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-grafico">
+      <h2>Local vs Domicilio</h2>
+      <div class="sin-datos" *ngIf="pedidos.length === 0">Sin datos en este rango</div>
+      <div class="comparativa" *ngIf="pedidos.length > 0">
+        <div class="barra-comparativa">
+          <div class="segmento segmento-local" [style.width.%]="porcentajeLocal()">
+            <span *ngIf="porcentajeLocal() > 12">{{ porcentajeLocal().toFixed(0) }}%</span>
+          </div>
+          <div class="segmento segmento-domicilio" [style.width.%]="porcentajeDomicilio()">
+            <span *ngIf="porcentajeDomicilio() > 12">{{ porcentajeDomicilio().toFixed(0) }}%</span>
+          </div>
+        </div>
+        <div class="leyenda-comparativa">
+          <div class="leyenda-item">
+            <span class="punto punto-local"></span>
+            Local — {{ countLocal }} pedidos, {{ ventasLocal.toFixed(2) }} €
+          </div>
+          <div class="leyenda-item">
+            <span class="punto punto-domicilio"></span>
+            Domicilio — {{ countDomicilio }} pedidos, {{ ventasDomicilio.toFixed(2) }} €
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-grafico">
+      <h2>Forma de pago</h2>
+      <div class="sin-datos" *ngIf="pedidos.length === 0">Sin datos en este rango</div>
+      <div class="comparativa" *ngIf="pedidos.length > 0">
+        <div class="barra-comparativa">
+          <div class="segmento segmento-tarjeta" [style.width.%]="porcentajeTarjeta()">
+            <span *ngIf="porcentajeTarjeta() > 12">{{ porcentajeTarjeta().toFixed(0) }}%</span>
+          </div>
+          <div class="segmento segmento-efectivo" [style.width.%]="porcentajeEfectivo()">
+            <span *ngIf="porcentajeEfectivo() > 12">{{ porcentajeEfectivo().toFixed(0) }}%</span>
+          </div>
+        </div>
+        <div class="leyenda-comparativa">
+          <div class="leyenda-item">
+            <span class="punto punto-tarjeta"></span>
+            Tarjeta — {{ ventasTarjeta.toFixed(2) }} €
+          </div>
+          <div class="leyenda-item">
+            <span class="punto punto-efectivo"></span>
+            Efectivo — {{ ventasEfectivo.toFixed(2) }} €
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>

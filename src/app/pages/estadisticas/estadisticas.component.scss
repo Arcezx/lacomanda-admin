@@ -1,0 +1,265 @@
+.pagina-header {
+  margin-bottom: 20px;
+
+  h1 {
+    margin: 0;
+    color: #2b2b2b;
+  }
+}
+
+.filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.82rem;
+    color: #6b6b6b;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 9px 12px;
+    border: 1px solid #e0dad7;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+.boton-buscar {
+  background: #BF0426;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 38px;
+}
+
+.error-mensaje {
+  color: #c0392b;
+  margin-bottom: 16px;
+}
+
+.kpis {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kpi-numero {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #BF0426;
+}
+
+.kpi-etiqueta {
+  font-size: 0.78rem;
+  color: #6b6b6b;
+}
+
+.panel-grafico {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    margin: 0 0 14px 0;
+    font-size: 0.9rem;
+    color: #2b2b2b;
+  }
+}
+
+.panel-ancho {
+  margin-bottom: 16px;
+}
+
+.sin-datos {
+  color: #999;
+  text-align: center;
+  padding: 24px 0;
+  font-size: 0.85rem;
+}
+
+.grafico-barras-dias {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 120px;
+  padding-top: 8px;
+}
+
+.dia-columna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.dia-total {
+  font-size: 0.66rem;
+  color: #6b6b6b;
+  margin-bottom: 3px;
+}
+
+.dia-barra-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.dia-barra-relleno {
+  width: 100%;
+  background: linear-gradient(180deg, #BF0426, #8C0327);
+  border-radius: 5px 5px 0 0;
+  min-height: 3px;
+  transition: height 0.4s ease;
+}
+
+.dia-etiqueta {
+  font-size: 0.68rem;
+  color: #6b6b6b;
+  margin-top: 4px;
+}
+
+.graficos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.barra-fila {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.barra-nombre {
+  flex: 0 0 110px;
+  font-size: 0.74rem;
+  color: #2b2b2b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barra-track {
+  flex: 1;
+  height: 14px;
+  background: #F7F3F1;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  border-radius: 7px;
+  transition: width 0.4s ease;
+}
+
+.barra-valor {
+  flex: 0 0 20px;
+  text-align: right;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.donut-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.donut-svg {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+.donut-leyenda {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.74rem;
+}
+
+.comparativa {
+  padding-top: 6px;
+}
+
+.barra-comparativa {
+  display: flex;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.segmento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.76rem;
+  transition: width 0.4s ease;
+}
+
+.segmento-local { background: #BF0426; }
+.segmento-domicilio { background: #F28705; }
+.segmento-tarjeta { background: #1976d2; }
+.segmento-efectivo { background: #2e7d32; }
+
+.leyenda-comparativa {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #2b2b2b;
+}
+
+.punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.punto-local { background: #BF0426; }
+.punto-domicilio { background: #F28705; }
+.punto-tarjeta { background: #1976d2; }
+.punto-efectivo { background: #2e7d32; }

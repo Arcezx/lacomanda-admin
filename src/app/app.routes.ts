@@ -8,6 +8,7 @@ import { authGuard } from './guards/auth.guard';
 import { MesasComponent } from './pages/mesas/mesas.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { HistorialComponent } from './pages/historial/historial.component';
+import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'mesas', component: MesasComponent },
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'historial', component: HistorialComponent },
+      { path: 'estadisticas', component: EstadisticasComponent },
     ],
   },
 ];

@@ -2,6 +2,7 @@ export interface LineaPedido {
   id: number;
   productoId: number;
   productoNombreEs: string;
+  categoriaNombreEs: string;
   precioUnitario: number;
   cantidad: number;
   notas: string;
