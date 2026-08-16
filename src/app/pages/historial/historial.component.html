@@ -1,0 +1,62 @@
+<div class="pagina-header">
+  <h1>Historial de pedidos</h1>
+</div>
+
+<div class="filtros">
+  <div class="campo">
+    <label>Desde</label>
+    <input type="date" [(ngModel)]="desde" />
+  </div>
+  <div class="campo">
+    <label>Hasta</label>
+    <input type="date" [(ngModel)]="hasta" />
+  </div>
+  <button class="boton-buscar" (click)="buscar()">Buscar</button>
+</div>
+
+<p class="error-mensaje" *ngIf="error">{{ error }}</p>
+
+<div class="resumen" *ngIf="buscado && !cargando">
+  <div class="resumen-item">
+    <span class="resumen-numero">{{ pedidos.length }}</span>
+    <span class="resumen-etiqueta">Pedidos</span>
+  </div>
+  <div class="resumen-item">
+    <span class="resumen-numero">{{ totalGeneral().toFixed(2) }} €</span>
+    <span class="resumen-etiqueta">Total facturado</span>
+  </div>
+  <div class="resumen-item">
+    <span class="resumen-numero">{{ contarPorEstado('ENVIADO') }}</span>
+    <span class="resumen-etiqueta">Entregados</span>
+  </div>
+</div>
+
+<div class="tabla-wrapper" *ngIf="buscado && !cargando">
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Mesa / Dirección</th>
+        <th>Productos</th>
+        <th>Estado</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos">
+        <td>{{ pedido.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ pedido.tipo === 'LOCAL' ? 'Mesa' : 'Domicilio' }}</td>
+        <td>{{ pedido.tipo === 'LOCAL' ? 'Mesa ' + pedido.mesaNumero : pedido.domicilio?.direccion }}</td>
+        <td>{{ pedido.lineas.length }} producto{{ pedido.lineas.length === 1 ? '' : 's' }}</td>
+        <td>
+          <span class="badge" [ngClass]="'badge-' + pedido.estado.toLowerCase()">{{ pedido.estado }}</span>
+        </td>
+        <td>{{ pedido.total.toFixed(2) }} €</td>
+      </tr>
+      <tr *ngIf="pedidos.length === 0">
+        <td colspan="6" class="sin-resultados">No hay pedidos en ese rango de fechas</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

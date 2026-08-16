@@ -1,0 +1,124 @@
+.pagina-header {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    color: #2b2b2b;
+  }
+}
+
+.filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.82rem;
+    color: #6b6b6b;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 9px 12px;
+    border: 1px solid #e0dad7;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+.boton-buscar {
+  background: #BF0426;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 38px;
+}
+
+.error-mensaje {
+  color: #c0392b;
+  margin-bottom: 16px;
+}
+
+.resumen {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.resumen-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.resumen-numero {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #BF0426;
+}
+
+.resumen-etiqueta {
+  font-size: 0.8rem;
+  color: #6b6b6b;
+}
+
+.tabla-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #F7F3F1;
+  color: #6b6b6b;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 12px 16px;
+  border-top: 1px solid #f0ebe8;
+  font-size: 0.9rem;
+}
+
+.sin-resultados {
+  text-align: center;
+  color: #999;
+  padding: 30px 0;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.badge-pendiente { background: #fdf0e0; color: #F28705; }
+.badge-en_preparacion { background: #e3f0fc; color: #1976d2; }
+.badge-listo { background: #f3e5f5; color: #8e24aa; }
+.badge-enviado { background: #e8f5e9; color: #2e7d32; }

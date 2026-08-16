@@ -7,6 +7,7 @@ import { ProductoFormComponent } from './pages/producto-form/producto-form.compo
 import { authGuard } from './guards/auth.guard';
 import { MesasComponent } from './pages/mesas/mesas.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { HistorialComponent } from './pages/historial/historial.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'categorias', pathMatch: 'full' },
       { path: 'mesas', component: MesasComponent },
       { path: 'usuarios', component: UsuariosComponent },
+      { path: 'historial', component: HistorialComponent },
     ],
   },
 ];
