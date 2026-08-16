@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MesasService } from '../../services/mesas.service';
+import { ConfiguracionService } from '../../services/configuracion.service';
 import { Mesa } from '../../models/mesa.model';
+import * as QRCode from 'qrcode';
 
 @Component({
   selector: 'app-mesas',
@@ -22,10 +24,22 @@ export class MesasComponent implements OnInit {
   formNumero: number | null = null;
   formCapacidad: number | null = null;
 
-  constructor(private mesasService: MesasService) {}
+  urlBase = '';
+  modalUrlAbierto = false;
+  formUrlBase = '';
+
+  modalQrAbierto = false;
+  qrImagenActual = '';
+  mesaQrActual: Mesa | null = null;
+
+  constructor(
+    private mesasService: MesasService,
+    private configuracionService: ConfiguracionService
+  ) {}
 
   ngOnInit() {
     this.cargar();
+    this.cargarUrlBase();
   }
 
   cargar() {
@@ -38,6 +52,37 @@ export class MesasComponent implements OnInit {
       error: (err) => {
         this.error = 'Error al cargar mesas';
         this.cargando = false;
+        console.error(err);
+      },
+    });
+  }
+
+  cargarUrlBase() {
+    this.configuracionService.obtener('url_carta_cliente').subscribe({
+      next: (url) => (this.urlBase = url),
+      error: () => (this.urlBase = 'http://localhost:8100'),
+    });
+  }
+
+  abrirModalUrl() {
+    this.formUrlBase = this.urlBase;
+    this.modalUrlAbierto = true;
+  }
+
+  cerrarModalUrl() {
+    this.modalUrlAbierto = false;
+  }
+
+  guardarUrlBase() {
+    if (!this.formUrlBase.trim()) return;
+
+    this.configuracionService.guardar('url_carta_cliente', this.formUrlBase.trim()).subscribe({
+      next: () => {
+        this.urlBase = this.formUrlBase.trim();
+        this.cerrarModalUrl();
+      },
+      error: (err) => {
+        this.error = 'Error al guardar la URL';
         console.error(err);
       },
     });
@@ -97,5 +142,32 @@ export class MesasComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  urlCompleta(mesa: Mesa): string {
+    return `${this.urlBase}/home?codigo=${mesa.qrCode}`;
+  }
+
+  async verQr(mesa: Mesa) {
+    this.mesaQrActual = mesa;
+    this.qrImagenActual = await QRCode.toDataURL(this.urlCompleta(mesa), {
+      width: 300,
+      margin: 1,
+      color: { dark: '#BF0426', light: '#ffffff' },
+    });
+    this.modalQrAbierto = true;
+  }
+
+  cerrarModalQr() {
+    this.modalQrAbierto = false;
+  }
+
+  descargarQr() {
+    if (!this.qrImagenActual || !this.mesaQrActual) return;
+
+    const enlace = document.createElement('a');
+    enlace.href = this.qrImagenActual;
+    enlace.download = `qr-mesa-${this.mesaQrActual.numero}.png`;
+    enlace.click();
   }
 }

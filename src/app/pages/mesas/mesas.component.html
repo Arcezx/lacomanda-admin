@@ -1,6 +1,9 @@
 <div class="pagina-header">
   <h1>Mesas</h1>
-  <button class="boton-nuevo" (click)="abrirNuevo()">+ Nueva mesa</button>
+  <div class="header-acciones">
+    <button class="boton-url" (click)="abrirModalUrl()">Configurar URL</button>
+    <button class="boton-nuevo" (click)="abrirNuevo()">+ Nueva mesa</button>
+  </div>
 </div>
 
 <p class="error-mensaje" *ngIf="error">{{ error }}</p>
@@ -27,6 +30,7 @@
         </td>
         <td class="qr-code">{{ mesa.qrCode }}</td>
         <td class="acciones">
+          <button class="boton-qr" (click)="verQr(mesa)">Ver QR</button>
           <button class="boton-editar" (click)="abrirEditar(mesa)">Editar</button>
           <button class="boton-eliminar" (click)="eliminar(mesa)">Eliminar</button>
         </td>
@@ -48,6 +52,36 @@
     <div class="modal-acciones">
       <button class="boton-cancelar" (click)="cerrarModal()">Cancelar</button>
       <button class="boton-guardar" (click)="guardar()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="modalUrlAbierto" (click)="cerrarModalUrl()">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+    <h2>URL de la carta del cliente</h2>
+    <p class="modal-descripcion">Esta es la URL que se usará dentro de todos los códigos QR.</p>
+
+    <label>URL base</label>
+    <input type="text" [(ngModel)]="formUrlBase" placeholder="http://localhost:8100" />
+
+    <div class="modal-acciones">
+      <button class="boton-cancelar" (click)="cerrarModalUrl()">Cancelar</button>
+      <button class="boton-guardar" (click)="guardarUrlBase()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="modalQrAbierto" (click)="cerrarModalQr()">
+  <div class="modal-panel modal-qr" (click)="$event.stopPropagation()">
+    <h2>Mesa {{ mesaQrActual?.numero }}</h2>
+
+    <img [src]="qrImagenActual" alt="Código QR" class="qr-imagen" />
+
+    <p class="qr-url">{{ mesaQrActual ? urlCompleta(mesaQrActual) : '' }}</p>
+
+    <div class="modal-acciones">
+      <button class="boton-cancelar" (click)="cerrarModalQr()">Cerrar</button>
+      <button class="boton-guardar" (click)="descargarQr()">Descargar</button>
     </div>
   </div>
 </div>

@@ -161,3 +161,50 @@ td {
   font-weight: 600;
   cursor: pointer;
 }
+.header-acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.boton-url {
+  background: #eef1ec;
+  color: #2b2b2b;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-qr {
+  background: #eef1ec;
+  color: #2b2b2b;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.modal-descripcion {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  margin: -10px 0 16px 0;
+}
+
+.modal-qr {
+  text-align: center;
+}
+
+.qr-imagen {
+  width: 220px;
+  height: 220px;
+  margin: 10px 0;
+}
+
+.qr-url {
+  font-size: 0.75rem;
+  color: #999;
+  word-break: break-all;
+  margin-bottom: 10px;
+}
