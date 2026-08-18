@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
-const API_URL = 'http://localhost:8090/api';
+const API_URL = 'https://lacomanda-backend.onrender.com/api';
 
 export interface UsuarioRequest {
   username: string;
